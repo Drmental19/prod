@@ -3,6 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:lastfirebase/pages/login_screen.dart';
 import 'package:lastfirebase/src/pallete.dart';
 
+import 'function/retrieve_data/getData.dart';
+import 'model/RQ35K_model.dart';
+
+
+List<PT_RQ35K> listRQ35K = [];
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
@@ -13,6 +19,7 @@ Future<void> main() async {
     messagingSenderId: '549212009977',
     projectId: 'storage-product-2a98d',
   ));
+  listRQ35K = await getDataRQ35K();
   runApp(const MyApp());
 }
 
@@ -27,7 +34,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData.dark().copyWith(
         scaffoldBackgroundColor: Pallete.backgroundColor,
       ),
-      home: const LoginScreen(),
+      home: LoginScreen(),
     );
   }
 }

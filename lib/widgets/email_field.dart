@@ -3,9 +3,11 @@ import 'package:lastfirebase/src/pallete.dart';
 
 class EmailField extends StatefulWidget {
   final String hintText;
+  final TextEditingController controller;
   const EmailField({
     Key? key,
     required this.hintText,
+    required this.controller,
   }) : super(key: key);
 
   @override
@@ -20,6 +22,7 @@ class _EmailFieldState extends State<EmailField> {
         maxWidth: 400,
       ),
       child: TextFormField(
+        controller: widget.controller,
         decoration: InputDecoration(
           contentPadding: const EdgeInsets.all(20),
           enabledBorder: OutlineInputBorder(

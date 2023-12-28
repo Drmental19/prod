@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:lastfirebase/widgets/email_field.dart';
 import 'package:lastfirebase/widgets/password_field.dart';
-
 import 'package:lastfirebase/widgets/sign_in_button.dart';
 
 class LoginScreen extends StatelessWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+  LoginScreen({Key? key}) : super(key: key);
+
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -14,16 +16,16 @@ class LoginScreen extends StatelessWidget {
         fit: StackFit.expand,
         children: [
           Image.asset(
-            'assets/images/background_hexo.jpg', // Đường dẫn đến ảnh nền của bạn
+            'assets/images/background_hexo.jpg',
             fit: BoxFit.cover,
           ),
           Container(
-            color: Colors.black
-                .withOpacity(0.3), // Điều chỉnh độ mờ ở đây (giữa 0 và 1)
+            color: Colors.black.withOpacity(0.3),
           ),
           SingleChildScrollView(
             child: Center(
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Image.asset(
                     'assets/images/HexoGrp.png',
@@ -38,16 +40,21 @@ class LoginScreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 15),
-                  const EmailField(
+                  EmailField(
                     hintText: 'Enter your email',
+                    controller: emailController,
                   ),
                   const SizedBox(height: 15),
-                  const PasswordField(
+                  PasswordField(
                     hiddenText: true,
                     hintText: 'Enter your password',
+                    controller: passwordController,
                   ),
                   const SizedBox(height: 25),
-                  const SigninButton(),
+                  SigninButton(
+                    emailController: emailController,
+                    passwordController: passwordController,
+                  ),
                 ],
               ),
             ),
