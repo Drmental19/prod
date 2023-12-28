@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "549212009977",
+    "project_id": "storage-product-2a98d",
+    "storage_bucket": "storage-product-2a98d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:549212009977:android:b260a9a1c533cc72ac7928",
+        "android_client_info": {
+          "package_name": "com.example.lastfirebase"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAcI478YsKNbEycPBrmDa5FPyhOPSvO56g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:549212009977:android:107267e35bc6cba6ac7928",
+        "android_client_info": {
+          "package_name": "com.example.storage_products"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAcI478YsKNbEycPBrmDa5FPyhOPSvO56g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
