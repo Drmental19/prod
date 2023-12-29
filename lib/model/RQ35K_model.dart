@@ -12,7 +12,6 @@ class PT_RQ35K {
   String? Note;
   String? Status;
 
-
   PT_RQ35K({
     required this.No,
     required this.Projector,
@@ -24,6 +23,24 @@ class PT_RQ35K {
     required this.Card,
     required this.Country_of_Loan,
     required this.Date_Import,
+    this.Note,
+    this.Status,
   });
 
+  Map<String, dynamic> toFirestore() {
+    return {
+      'No': No,
+      'Projector': Projector,
+      'Projector S/N': Projector_Serial_Number,
+      'IP Address': IP_Address,
+      'Light source hours': Light_source_hours,
+      'Projector hours': Projector_hours,
+      'Main SW ver': Main_SW_ver,
+      'Card': Card,
+      'Country of Loan': Country_of_Loan,
+      'Date Import': Date_Import,
+      'Note': Note ?? '',  // Handle null value for Note
+      'Status': Status ?? '',  // Handle null value for Status
+    };
+  }
 }

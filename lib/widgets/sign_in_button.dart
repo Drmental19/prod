@@ -1,20 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:lastfirebase/pages/home_page.dart';
 import 'package:lastfirebase/src/pallete.dart';
-
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../function/sign_in/sign_in.dart';
+import '../pages/login_screen.dart';
 
-
-
-class SigninButton extends StatelessWidget {
+class SigninButton extends StatefulWidget {
   final TextEditingController emailController;
   final TextEditingController passwordController;
 
-  const SigninButton({
+  SigninButton({
     Key? key,
     required this.emailController,
     required this.passwordController,
   }) : super(key: key);
+
+  @override
+  _SigninButtonState createState() => _SigninButtonState();
+}
+
+class _SigninButtonState extends State<SigninButton> {
+
 
   @override
   Widget build(BuildContext context) {
@@ -22,12 +29,15 @@ class SigninButton extends StatelessWidget {
       constraints: const BoxConstraints(maxWidth: 150, maxHeight: 45),
       child: ElevatedButton(
         onPressed: () async {
-          String email = emailController.text;
-          String password = passwordController.text;
-
+          String email = widget.emailController.text;
+          String password = widget.passwordController.text;
           // Now you can use email and password in your sign-in logic
           if (await check_sign_in(email, password)) {
-            Navigator.push(
+            print('Successfull');
+            SharedPreferences preferences = await SharedPreferences.getInstance();
+            preferences.setString('email', email);
+
+            Navigator.pushReplacement(
               context,
               MaterialPageRoute(builder: (context) => const HomePage()),
             );

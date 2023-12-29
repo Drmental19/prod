@@ -16,17 +16,19 @@ Future<List<PT_RQ35K>> getDataRQ35K() async {
     print("Successfully completed");
 
     for (var doc in querySnapshot.docs) {
+      print(doc.data().toString());
       listAdd.add(PT_RQ35K(
         No: doc.data()['No'],
         Projector: doc.data()['Projector'],
-        Projector_Serial_Number: doc.data()['Projector S/N'],
-        IP_Address: doc.data()['IP Address'],
-        Light_source_hours: doc.data()['Light source hours'],
-        Projector_hours: doc.data()['Projector hours'],
-        Main_SW_ver: doc.data()['Main SW ver'],
-        Card: doc.data()['Card'],
-        Country_of_Loan: doc.data()['Country of Loan'],
-        Date_Import: doc.data()['Date Import'],
+        Projector_Serial_Number: doc.data()['Projector S/N'] ?? '',
+        IP_Address: doc.data()['IP Address'] ?? '',
+        Light_source_hours: doc.data()['Light source hours'] ?? '',
+        Projector_hours: doc.data()['Projector hours'] ?? '',
+        Main_SW_ver: doc.data()['Main SW ver'] ?? '',
+        Card: doc.data()['Card'] ?? [],
+        Country_of_Loan: doc.data()['Country of Loan'] ?? '',
+        Date_Import: doc.data()['Date Import'] ?? '',
+
       ));
     }
 

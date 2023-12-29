@@ -1,23 +1,54 @@
 import 'package:flutter/material.dart';
+import 'package:lastfirebase/function/add_data/add_RQ35K.dart';
+import 'package:lastfirebase/function/retrieve_data/getData.dart';
+import 'package:lastfirebase/pages/login_screen.dart';
 import 'package:lastfirebase/src/pallete.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../main.dart';
-
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
   @override
-  // ignore: library_private_types_in_public_api
   _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
   TextEditingController searchController = TextEditingController();
+  String email = '';
+
+  @override
+  initState()  {
+    getData();
+    // TODO: implement initState
+    super.initState();
+    getEmail();
+  }
+  getData() async {
+    listRQ35K = await getDataRQ35K();
+  }
+
+
+  Future getEmail() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    setState(() {
+      email = preferences.getString('email')!;
+    });
+  }
+
+
+
+  Future logOut(BuildContext context) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    preferences.remove('email');
+    Navigator.push(context, MaterialPageRoute(builder: (context)=> LoginScreen()));
+  }
 
   @override
   Widget build(BuildContext context) {
+    getData();
     return Scaffold(
       backgroundColor: backGroundColor,
       appBar: AppBar(
@@ -32,64 +63,58 @@ class _HomePageState extends State<HomePage> {
             ),
             // Search box
             Expanded(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  SizedBox(
-                    height: 35,
-                    width: 500,
-                    child: TextField(
-                      style: TextStyle(color: itemColor),
-                      controller: searchController,
-                      onChanged: (value) {
-                        setState(() {
-                          // Here is for searchBox function...
-                        });
-                      },
-                      // Decoration searchBox
-                      decoration: InputDecoration(
-                        contentPadding: const EdgeInsets.only(bottom: 4.0),
-                        hintText: "Search",
-                        hintStyle: TextStyle(
-                            color: Colors.grey[500],
-                            fontSize: 14,
-                            fontWeight: FontWeight.w100),
-                        prefixIcon: Icon(
-                          Icons.search,
-                          color: Colors.grey[500],
-                          size: 17,
-                        ),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(50.0),
-                          borderSide: const BorderSide(
-                            width: 1,
-                            color: Pallete.hexocyan,
-                          ),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(50.0),
-                          borderSide: const BorderSide(
-                            width: 1,
-                            color: Pallete.hexocyan,
-                          ),
-                        ),
+              child: Container(
+                height: 35,
+                child: TextField(
+                  style: TextStyle(color: itemColor),
+                  controller: searchController,
+                  onChanged: (value) {
+                    setState(() {
+                      // Here is for searchBox function...
+                    });
+                  },
+                  // Decoration searchBox
+                  decoration: InputDecoration(
+                    contentPadding: const EdgeInsets.only(bottom: 4.0),
+                    hintText: "Search",
+                    hintStyle: TextStyle(
+                        color: Colors.grey[500],
+                        fontSize: 14,
+                        fontWeight: FontWeight.w100),
+                    prefixIcon: Icon(
+                      Icons.search,
+                      color: Colors.grey[500],
+                      size: 17,
+                    ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(50.0),
+                      borderSide: const BorderSide(
+                        width: 1,
+                        color: Pallete.hexocyan,
+                      ),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(50.0),
+                      borderSide: const BorderSide(
+                        width: 1,
+                        color: Pallete.hexocyan,
                       ),
                     ),
                   ),
-                ],
+                ),
               ),
             ),
             // Sort button
             IconButton(
                 onPressed: () {
                   // Here is for filter function...
+                  logOut(context);
                 },
                 icon: const Icon(Icons.sort),
                 color: itemColor)
           ],
         ),
       ),
-      // Vertical menu
       drawer: Drawer(
         backgroundColor: resItemColor,
         width: 200,
@@ -125,57 +150,7 @@ class _HomePageState extends State<HomePage> {
                 _onMenuItemSelected(0);
               },
             ),
-            ListTile(
-              leading: Icon(
-                _selectedIndex == 1 ? Icons.download : Icons.download_outlined,
-                color: _selectedIndex == 1 ? Pallete.hexocyan : itemColor,
-              ),
-              title: Text(
-                'Import',
-                style: TextStyle(
-                    color: _selectedIndex == 1 ? Pallete.hexocyan : itemColor,
-                    fontSize: 17.0,
-                    fontWeight: FontWeight.w400),
-              ),
-              selected: _selectedIndex == 1,
-              onTap: () {
-                _onMenuItemSelected(1);
-              },
-            ),
-            ListTile(
-              leading: Icon(
-                _selectedIndex == 2 ? Icons.upload : Icons.upload_outlined,
-                color: _selectedIndex == 2 ? Pallete.hexocyan : itemColor,
-              ),
-              title: Text(
-                'Export',
-                style: TextStyle(
-                    color: _selectedIndex == 2 ? Pallete.hexocyan : itemColor,
-                    fontSize: 17.0,
-                    fontWeight: FontWeight.w400),
-              ),
-              selected: _selectedIndex == 2,
-              onTap: () {
-                _onMenuItemSelected(2);
-              },
-            ),
-            ListTile(
-              leading: Icon(
-                _selectedIndex == 3 ? Icons.settings : Icons.settings_outlined,
-                color: _selectedIndex == 3 ? Pallete.hexocyan : itemColor,
-              ),
-              title: Text(
-                'Settings',
-                style: TextStyle(
-                    color: _selectedIndex == 3 ? Pallete.hexocyan : itemColor,
-                    fontSize: 17.0,
-                    fontWeight: FontWeight.w400),
-              ),
-              selected: _selectedIndex == 3,
-              onTap: () {
-                _onMenuItemSelected(3);
-              },
-            ),
+            // ... Other Drawer items ...
           ],
         ),
       ),
@@ -228,7 +203,13 @@ class _HomePageState extends State<HomePage> {
                       DataColumn(label: Text('Projector')),
                       DataColumn(label: Text('Projector S/N')),
                       DataColumn(label: Text('IP Address')),
-                      DataColumn(label: Text('Date_Import')),
+                      DataColumn(label: Text('Light source hours')),
+                      DataColumn(label: Text('Projector hours')),
+                      DataColumn(label: Text('Main SW ver')),
+                      DataColumn(label: Text('Country of Loan')),
+                      DataColumn(label: Text('Ngày nhập')),
+                      DataColumn(label: Text('Note')),
+                      DataColumn(label: Text('Status')),
                     ],
                     rows: List.generate(
                       listRQ35K.length,
@@ -244,8 +225,16 @@ class _HomePageState extends State<HomePage> {
                               ),
                             ),
                             DataCell(Text(currentItem.IP_Address.toString())),
+                            DataCell(Text(
+                                currentItem.Light_source_hours.toString())),
+                            DataCell(
+                                Text(currentItem.Projector_hours.toString())),
+                            DataCell(Text(currentItem.Main_SW_ver.toString())),
+                            DataCell(
+                                Text(currentItem.Country_of_Loan.toString())),
                             DataCell(Text(currentItem.Date_Import.toString())),
-                            // Add more DataCell widgets for other properties
+                            DataCell(Text(currentItem.Note.toString())),
+                            DataCell(Text(currentItem.Status.toString())),
                           ],
                         );
                       },
@@ -253,6 +242,12 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
               ),
+              ElevatedButton(
+                  onPressed: (){
+                    setState(() {
+                      addData();
+                    });
+              }, child: Icon(Icons.add)),
             ],
           ),
         ),
@@ -263,8 +258,7 @@ class _HomePageState extends State<HomePage> {
   void _onMenuItemSelected(int index) {
     setState(() {
       _selectedIndex = index;
-      // Handle navigation or other actions based on the selected index
     });
-    Navigator.pop(context); // Close the drawer after selecting an item
+    Navigator.pop(context);
   }
 }
