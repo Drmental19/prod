@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:lastfirebase/pages/settings_page.dart';
 import 'package:lastfirebase/src/pallete.dart';
 
 import '../main.dart';
-
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -174,11 +174,15 @@ class _HomePageState extends State<HomePage> {
               selected: _selectedIndex == 3,
               onTap: () {
                 _onMenuItemSelected(3);
+                // Navigate to Settings Screen
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => const SettingsPage()));
               },
             ),
           ],
         ),
       ),
+      // Giao diện Home
       body: Center(
         child: SingleChildScrollView(
           child: Column(
@@ -202,7 +206,10 @@ class _HomePageState extends State<HomePage> {
                           children: [
                             Padding(
                               padding: const EdgeInsets.all(8.0),
-                              child: Text('Danh sách thiết bị'),
+                              child: Text(
+                                'Danh sách thiết bị',
+                                style: TextStyle(color: itemColor),
+                              ),
                             ),
                             // SlidingInfoButton(),
                           ],
@@ -232,7 +239,7 @@ class _HomePageState extends State<HomePage> {
                     ],
                     rows: List.generate(
                       listRQ35K.length,
-                          (index) {
+                      (index) {
                         var currentItem = listRQ35K[index];
                         return DataRow(
                           cells: [

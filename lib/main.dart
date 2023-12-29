@@ -1,12 +1,16 @@
+// ignore_for_file: unused_import
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:lastfirebase/pages/import_page.dart';
 import 'package:lastfirebase/pages/login_screen.dart';
+import 'package:lastfirebase/pages/settings_page.dart';
+
 import 'package:lastfirebase/src/pallete.dart';
 
 import 'function/retrieve_data/getData.dart';
 import 'model/RQ35K_model.dart';
-
 
 List<PT_RQ35K> listRQ35K = [];
 
@@ -29,14 +33,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Welcome!',
       theme: ThemeData.dark().copyWith(
         scaffoldBackgroundColor: Pallete.backgroundColor,
       ),
-      // home: LoginScreen(),
-      home: ImportPage(),
+      home: LoginScreen(),
+      // home: ImportPage(),
+      // home: SettingsPage(),
     );
   }
 }
