@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:lastfirebase/pages/import_page.dart';
 import 'package:lastfirebase/pages/login_screen.dart';
 import 'package:lastfirebase/src/pallete.dart';
 
@@ -34,7 +35,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData.dark().copyWith(
         scaffoldBackgroundColor: Pallete.backgroundColor,
       ),
-      home: LoginScreen(),
+      // home: LoginScreen(),
+      home: ImportPage(),
     );
   }
 }

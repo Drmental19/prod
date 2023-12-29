@@ -181,81 +181,79 @@ class _HomePageState extends State<HomePage> {
       ),
       body: Center(
         child: SingleChildScrollView(
-          child: Container(
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Align(
-                    alignment: Alignment.topLeft,
-                    child: Row(
-                      children: [
-                        Container(
-                          height: 40.0,
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              color: Colors.black,
-                              width: 2.0,
-                            ),
-                            borderRadius: BorderRadius.circular(10.0),
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Align(
+                  alignment: Alignment.topLeft,
+                  child: Row(
+                    children: [
+                      Container(
+                        height: 40.0,
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: Colors.black,
+                            width: 2.0,
                           ),
-                          child: Row(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text('Danh sách thiết bị'),
-                              ),
-                              // SlidingInfoButton(),
-                            ],
-                          ),
+                          borderRadius: BorderRadius.circular(10.0),
                         ),
-                      ],
-                    ),
+                        child: Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text('Danh sách thiết bị'),
+                            ),
+                            // SlidingInfoButton(),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 20, left: 50),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: Colors.black,
-                        width: 2.0,
-                      ),
-                      borderRadius: BorderRadius.circular(10.0),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 20, left: 50),
+                child: Container(
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Colors.black,
+                      width: 2.0,
                     ),
-                    child: DataTable(
-                      columns: [
-                        DataColumn(label: Text('No')),
-                        DataColumn(label: Text('Projector')),
-                        DataColumn(label: Text('Projector S/N')),
-                        DataColumn(label: Text('IP Address')),
-                        DataColumn(label: Text('Date_Import')),
-                      ],
-                      rows: List.generate(
-                        listRQ35K.length,
-                            (index) {
-                          var currentItem = listRQ35K[index];
-                          return DataRow(
-                            cells: [
-                              DataCell(Text(currentItem.No.toString())),
-                              DataCell(Text(currentItem.Projector.toString())),
-                              DataCell(
-                                Text(
-                                  currentItem.Projector_Serial_Number.toString(),
-                                ),
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  child: DataTable(
+                    columns: [
+                      DataColumn(label: Text('No')),
+                      DataColumn(label: Text('Projector')),
+                      DataColumn(label: Text('Projector S/N')),
+                      DataColumn(label: Text('IP Address')),
+                      DataColumn(label: Text('Date_Import')),
+                    ],
+                    rows: List.generate(
+                      listRQ35K.length,
+                          (index) {
+                        var currentItem = listRQ35K[index];
+                        return DataRow(
+                          cells: [
+                            DataCell(Text(currentItem.No.toString())),
+                            DataCell(Text(currentItem.Projector.toString())),
+                            DataCell(
+                              Text(
+                                currentItem.Projector_Serial_Number.toString(),
                               ),
-                              DataCell(Text(currentItem.IP_Address.toString())),
-                              DataCell(Text(currentItem.Date_Import.toString())),
-                              // Add more DataCell widgets for other properties
-                            ],
-                          );
-                        },
-                      ),
+                            ),
+                            DataCell(Text(currentItem.IP_Address.toString())),
+                            DataCell(Text(currentItem.Date_Import.toString())),
+                            // Add more DataCell widgets for other properties
+                          ],
+                        );
+                      },
                     ),
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),
